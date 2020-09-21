@@ -260,10 +260,10 @@
         modelCtrl.$validators['invalid'] = function(value, viewValue) {
           var applicable, check;
           applicable = attrs.required && !modelCtrl.$isEmpty(viewValue);
-          if (opts.singleDatePicker) {
-            check = value && value.isValid();
+         if (opts.singleDatePicker) {
+            check = value && moment.isMoment(value) && value.isValid();
           } else {
-            check = value && value.startDate && value.startDate.isValid() && value.endDate && value.endDate.isValid();
+           check = value && value.startDate && moment.isMoment(value.startDate) && value.startDate.isValid() && value.endDate && moment.isMoment(value.endDate) && value.endDate.isValid();
           }
           return !applicable || !!check;
         };
